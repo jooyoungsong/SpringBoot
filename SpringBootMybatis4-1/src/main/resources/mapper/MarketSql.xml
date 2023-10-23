@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.model.mapper.MarketMapperInter">
+	<select id="getTotalCount" resultType="int"> <!-- id값은 interface에서 설정한 것 -->
+		select count(*) from market 
+	</select>
+	<select id="getAllSangpums" resultType="mdto"><!-- id값은 interface에서 설정한 것 -->
+		select * from market order by sang
+	</select>
+	<insert id="insertMarket" parameterType="mdto"><!-- id값은 interface에서 설정한 것 -->
+		insert into market (sang,price,photoname,ipgoday) values (#{sang},#{price},#{photoname},now());
+	</insert>
+	<select id="getData" resultType="mdto" parameterType="String"><!-- id값은 interface에서 설정한 것 -->
+		select * from market where num=#{num}
+	</select>
+	<update id="updateMarket" parameterType="mdto">
+		update market set sang=#{sang},price=#{price},photoname=#{photoname},ipgoday=now()
+	</update>
+	<delete id="deleteMarket" parameterType="String">
+		delete from market where num=#{num}
+	</delete>
+</mapper>
