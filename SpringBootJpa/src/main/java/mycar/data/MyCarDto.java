@@ -13,13 +13,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 
-@Entity
+@Entity  //JPA에서는 테이블 만드는 전체 구성이 Entity라고 부름
 @Table(name = "mycar") //자동으로 mycar라는 테이블이 mysql에 만들어 진다
 @Data
 public class MyCarDto {
 
 	@Id //각엔티티 구별할 식별아이디를 갖도록 설계(시퀀스)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)  //JPA 기본키 전략 4개 중 1개를 사용함
 	private long num;
 	
 	@Column(name = "carname")

@@ -39,7 +39,12 @@ onclick="location.href='writeform'">글쓰기</button>
 		<tr>
 			<td>${i.count }</td>
 			<td>
+			<c:if test="${dto.photoname!=null }">
 			<img alt="" src="../save/${dto.photoname }" style="width: 100px;">
+			</c:if>
+			<c:if test="${dto.photoname==null }">
+			<img alt="" src="../save/noImg.jpg" style="width: 100px;">
+			</c:if>
 			${dto.sang }
 			</td>
 			<td><fmt:formatNumber value="${dto.price }" type="currency"/></td>
