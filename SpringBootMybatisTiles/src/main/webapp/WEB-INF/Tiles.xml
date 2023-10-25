@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+ "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+ "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="layout1" template="/WEB-INF/layout/layout1.jsp">  <!-- layout1 지정 -->
+		<put-attribute name="title" value="/WEB-INF/layout/title.jsp"/> <!-- layout1에서 title 넣을거야  -->
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp"/> <!-- layout1에서 menu 넣을거야  -->
+		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/> <!-- layout1에서 main 넣을거야  -->
+		<put-attribute name="info" value="/WEB-INF/layout/info.jsp"/> <!-- layout1에서꺼에서 info 넣을거야  -->
+	</definition>
+	
+	<!-- <definition name="home.tiles" extends="layout1"> home.tiles만들건데 layout1에서 가져온다
+		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/>
+	</definition>
+	
+	<definition name="list.tiles" extends="layout1">  여기서 name은 매핑주소와 같은 거야=> 임의적으로 내가 만드는 것!
+		<put-attribute name="main" value="/WEB-INF/board/list.jsp"/> 
+	</definition>
+	
+	<definition name="input.tiles" extends="layout1"> 
+		<put-attribute name="main" value="/WEB-INF/board/addform.jsp"/>
+	</definition> -->
+	
+	<!-- 위에 3개를 wild card 형식으로 만들거야  -->
+	<definition name="/*/*" extends="layout1"> 
+		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+</tiles-definitions>
