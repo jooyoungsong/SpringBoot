@@ -13,7 +13,7 @@
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
-<img alt="" src="${root }/image/banner1.jpg">
+<img alt="" src="${root }/image/lozleymain1.png" style="width: 1100px; height: 660px;">
 <img alt="" src="${root }/image/banner2.jpg">
 <img alt="" src="${root }/image/banner3.jpg">
 <h2>Main page 입니다</h2>

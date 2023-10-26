@@ -12,37 +12,35 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-	div.layout div {
+	/* div.layout div {
 		border: 1px solid black;
-	}
+	} */
 	
 	div.layout div.title{
 		position: absolute;
-		top:10px;
-		left : 450px;
 		height: 100px;
 	}
 	
 	div.layout div.menu{
 		position: absolute;
-		top:150px;
-		left : 250px;
+		top:250px;
+		left : 450px;
 		height: 100px;
 	}
 	
 	div.layout div.info{
 		position: absolute;
-		top: 250px;
-		left : 50px;
+		top: 350px;
+		left : 30px;
 		height: 200px;
 		font-family: 'Dongle';
 		font-size: 17px;
-		width: 200px;
+		width: 50px;
 	}
 	div.layout div.main{
 		position: absolute;
-		top: 250px;
-		left : 300px;
+		top: 350px;
+		left : 450px;
 		height: 500px;
 		font-family: 'Dongle';
 		font-size: 17px;

@@ -13,7 +13,7 @@
 </head>
 <body>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
-<a href="${root }"><img alt="" src="${root }/image/title.png"> </a>  <!-- 어디에서든 사진 누르면 메인(root)로 가도록 설정 -->
-<b>SpringBoot+Mybatis+Tiles</b>
+<a href="${root }"><img alt="" src="${root }/image/title1.png" class="titleimg1"> </a>  <!-- 어디에서든 사진 누르면 메인(root)로 가도록 설정 -->
+<b><!-- SpringBoot+Mybatis+Tiles --></b>
 </body>
 </html>

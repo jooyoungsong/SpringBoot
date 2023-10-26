@@ -3,6 +3,7 @@
  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<!-- 레이아웃1 -->
 	<definition name="layout1" template="/WEB-INF/layout/layout1.jsp">  <!-- layout1 지정 -->
 		<put-attribute name="title" value="/WEB-INF/layout/title.jsp"/> <!-- layout1에서 title 넣을거야  -->
 		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp"/> <!-- layout1에서 menu 넣을거야  -->
@@ -24,6 +25,18 @@
 	
 	<!-- 위에 3개를 wild card 형식으로 만들거야  -->
 	<definition name="/*/*" extends="layout1"> 
+		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- 레이아웃2 -->
+	<definition name="layout2" template="/WEB-INF/layout/layout2.jsp">  <!-- layout1 지정 -->
+		<put-attribute name="title2" value="/WEB-INF/layout/title2.jsp"/> <!-- layout1에서 title 넣을거야  -->
+		<put-attribute name="menu2" value="/WEB-INF/layout/menu2.jsp"/> <!-- layout1에서 menu 넣을거야  -->
+		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/> <!-- layout1에서 main 넣을거야  -->
+	</definition>
+	
+	<!-- wild card 레이아웃2 -->
+	<definition name="/sub/*/*" extends="layout2"> <!-- name이 layout1과 동일하면 겹치기에 /sub를 앞에 더 추가해준다 --> 
 		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>
