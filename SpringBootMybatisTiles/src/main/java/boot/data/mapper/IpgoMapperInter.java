@@ -13,4 +13,5 @@ public interface IpgoMapperInter {
 	public void insertIpgo(IpgoDto dto);
 	public List<IpgoDto> getAllIpgos();
 	
+	
 }

@@ -1,9 +1,0 @@
-package boot.dto;
-
-public class PersonDto {
-
-	private String name;
-	private String addr;
-	private String hp;
-	
-}

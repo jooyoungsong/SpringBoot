@@ -13,5 +13,45 @@
 </head>
 <body>
 
+<h3 class="alert alert-info">${totalCount }명의 회원이 있습니다.</h3>
+
+<button type="button" class="btn btn-outline-info"
+onclick="location.href='form'">회원가입</button>
+
+	<table class="table table-hover" style="width: 1000px;">
+			<tr>
+				<th>No</th>
+				<th>Photo</th>
+				<th>Name</th>
+				<th>Id</th>
+				<th>Hp</th>
+				<th>Addr</th>
+				<th>Email</th>
+				<th>Since</th>
+				<th>Resign</th>
+			</tr>
+		<c:forEach var="dto" items="${list }" varStatus="i">
+			<tr>
+				<td>${i.count }</td>
+				<td>
+					<a href="detail?num=${dto.num }">
+					<img alt="" src="../membersave/${dto.photo }" style="width: 100px; height: 100px;">
+					</a>
+				</td>
+				<td>${dto.name }</td>
+				<td>${dto.id }</td>
+				<td>${dto.hp }</td>
+				<td>${dto.addr }</td>
+				<td>${dto.email }</td>
+				<td>
+					<fmt:formatDate value="${dto.gaipday }" pattern="yyyy-MM-dd"/>
+				</td>
+				<td>
+					<button type="button" class="btn btn-outline-danger"
+					onclick="location.href='delete?num=${dto.num}'">강퇴</button>
+				</td>
+			</tr>
+		</c:forEach>		
+	</table>
 </body>
 </html>
