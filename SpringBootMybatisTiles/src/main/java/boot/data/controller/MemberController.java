@@ -31,10 +31,25 @@ public class MemberController {
 	@Autowired
 	MemberServiece service;
 	
+	/*
+ 	@GetMapping("/member/myinfo") public String info() 
+ 	{ 
+ 		return "/member/myinfo";
+	}
+	*/
+	
 	@GetMapping("/member/myinfo")
-	public String info()
-	{
-		return "/member/myinfo";
+	public ModelAndView memberform(@RequestParam String id) {
+		
+		ModelAndView model=new ModelAndView();
+		
+		MemberDto dto=service.getDataById(id);
+		
+		model.addObject("dto", dto);
+		
+		model.setViewName("/member/myinfo");
+		
+		return model;
 	}
 
 	@GetMapping("/member/list")
@@ -75,7 +90,8 @@ public class MemberController {
 	
 	//insert (일단 list로 가게 만드세요_admin이 아니면 gaipsuccess로 이동하게 할 예정_member>gaipsuccess.jsp 폴더 생성하기)
 	@PostMapping("/member/insert")
-	public String insert(@ModelAttribute MemberDto dto,MultipartFile myphoto,HttpSession session)
+	public String insert(@ModelAttribute MemberDto dto,
+			MultipartFile myphoto,HttpSession session,Model model)
 	{
 		
 		//String path=request.getSession().getServletContext().getRealPath("/membersave");
@@ -99,18 +115,24 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		service.insertMember(dto);
+		model.addAttribute("dto", dto);
 		
-		return "redirect:list";
+		if(!dto.getId().equals("admin")) {
+		
+			service.insertMember(dto);
+			return "/member/gaipsuccess";
+		}else {
+			service.insertMember(dto);
+			return "redirect:list";
+		}	
 	}
 	
-	@GetMapping("/member/delete")
-	public String delete(String num)
-	{
-		service.deleteMember(num);
-		
-		return "redirect:list";
-	}
+	/*
+	 @GetMapping("/member/delete") public String delete(String num) {
+	 service.deleteMember(num);
+	  
+	 return "redirect:list"; }
+	 */
 	
 	@GetMapping("/member/detail")
 	public String getData(Model model,String num)
@@ -121,4 +143,75 @@ public class MemberController {
 		
 		return "/member/myinfo";
 	}
+	
+	
+	//10월30일_삭제는 ajax
+	@GetMapping("/member/delete")
+	@ResponseBody
+	public void deleteMember(@RequestParam String num,HttpSession session)
+	{
+		//사진 삭제 day1031
+		String path=session.getServletContext().getRealPath("/membersave");
+		String photo=service.getDataByNum(num).getPhoto();
+		File file=new File(path+"\\"+photo);
+		file.delete();
+
+		//day1030
+		service.deleteMember(num);
+	}
+	
+	//나의 정보에서 삭제
+		@GetMapping("/member/deleteme")
+		@ResponseBody  //이거는 ajax를 쓰려고 responsebody 주는 거야!
+		public void deleteinfo(String num,HttpSession session)
+		{
+			service.deleteMember(num);
+			
+			String path=session.getServletContext().getRealPath("/membersave");
+			String photo=service.getDataByNum(num).getPhoto();
+			File file=new File(path+"\\"+photo);
+			file.delete();
+			
+			session.removeAttribute("loginok");
+			session.removeAttribute("myid");
+			session.removeAttribute("loginphoto");
+			session.removeAttribute("saveok");
+			
+		}
+	
+	//나의 정보에서(디테일페이지)_사진만 수정
+	@PostMapping("/member/updatephoto")
+	@ResponseBody
+	public void photoload(String num, MultipartFile photo, HttpSession session) {
+		
+		//업로드 할 경로
+		String path=session.getServletContext().getRealPath("/membersave");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHss");
+		String fileName = sdf.format(new Date())+photo.getOriginalFilename();
+		
+		//업로드
+		try {
+			photo.transferTo(new File(path+"/"+fileName));
+			
+			service.updatePhoto(fileName, num);  //db 사진 수정
+			
+			session.setAttribute("loginphoto", fileName); //session사진 수정
+			
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping("/member/updatemember")
+	@ResponseBody
+	public void updateMember(@ModelAttribute MemberDto dto)
+	{
+		service.updateMember(dto);
+	}
+	
 }

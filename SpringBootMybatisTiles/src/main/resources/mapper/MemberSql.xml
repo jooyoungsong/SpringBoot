@@ -25,4 +25,29 @@
  		delete from bootmember where num=#{num}
  	</delete>
  	
+ 	<!-- 로그인 아이디  -->
+ 	<select id="getName" parameterType="String" resultType="String">
+ 		select name from bootmember where id=#{id}
+ 	</select>
+ 	
+ 	<select id="loginPassCheck" parameterType="Map" resultType="int">
+ 		select count(*) from bootmember where id=#{id} and pass=#{pass}
+ 	</select>
+ 	
+ 	<select id="getDataById" parameterType="String" resultType="member"> <!-- dto를 alias로 member라고 줬기에 이렇게 써줌 -->
+ 		select * from bootmember where id=#{id}
+ 	</select>
+
+	<update id="updatePhoto" parameterType="Map">
+		update bootmember set photo=#{photo} where num=#{num}
+	</update>
+	
+	<update id="updateMember" parameterType="member">
+		update bootmember set name=#{name}, hp=#{hp}, addr=#{addr}, email=#{email} where num=#{num}
+	</update>
+ 	
+ 	<!-- 해당 번호 사진 삭제를 위해 먼저 출력? -->
+ 	<select id="getDataByNum" parameterType="String" resultType="member">
+ 		select * from bootmember where num =#{num}
+ 	</select>
   </mapper>

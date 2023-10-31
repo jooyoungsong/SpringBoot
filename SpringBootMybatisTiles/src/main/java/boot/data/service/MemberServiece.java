@@ -1,6 +1,8 @@
 package boot.data.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,52 @@ public class MemberServiece implements MemberServieceInter {
 	public MemberDto getData(String num) {
 		// TODO Auto-generated method stub
 		return mapperInter.getData(num);
+	}
+
+	@Override
+	public String getName(String id) {
+		// TODO Auto-generated method stub
+		return mapperInter.getName(id);
+	}
+
+	@Override
+	public int loginPassCheck(String id, String pass) {
+		// TODO Auto-generated method stub
+		
+		Map<String, String> map=new HashMap<>();
+		map.put("id", id);
+		map.put("pass", pass);
+		
+		return mapperInter.loginPassCheck(map);
+	}
+
+	@Override
+	public MemberDto getDataById(String id) {
+		// TODO Auto-generated method stub
+		return mapperInter.getDataById(id);
+	}
+
+	@Override
+	public void updatePhoto(String photo, String num) {
+		// TODO Auto-generated method stub
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("photo", photo);
+		map.put("num", num);
+		mapperInter.updatePhoto(map);
+		
+	}
+
+	@Override
+	public void updateMember(MemberDto dto) {
+		// TODO Auto-generated method stub
+		mapperInter.updateMember(dto);
+	}
+
+	@Override
+	public MemberDto getDataByNum(String num) {
+		// TODO Auto-generated method stub
+		return mapperInter.getDataByNum(num);
 	}
 
 }
