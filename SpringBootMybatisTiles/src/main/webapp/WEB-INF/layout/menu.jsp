@@ -48,7 +48,7 @@
 			<a href="${root }/ipgo/list">상품목록</a>
 		</li>
 		<li>
-			<a href="${root }/board/list">답변형게시판</a>
+			<a href="${root }/reboard/list">답변형게시판</a>	<!-- day1101 -->
 		</li>
 		<li>
 			<a href="${root }/member/list">회원목록</a>
@@ -64,7 +64,7 @@
 		</li>
 	</c:if>
 		<li>
-			<a href="${root }/login/main">로그인</a>
+			<a href="${root }/memboard/list">회원게시판</a>  <!-- day1101 로그인->회원게시판으로 수정, 답변형게시판은 board에서 reboard로 수정 -->
 		</li>
 		<li>
 			<a href="${root }/road/map">오시는 길</a>

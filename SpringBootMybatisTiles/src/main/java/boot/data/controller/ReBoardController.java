@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ReBoardController {
 
-	@GetMapping("/board/list")
+	@GetMapping("/reboard/list")  //day1101 board/에서 reboard로 수정
 	public ModelAndView list()
 	{
 		ModelAndView model=new ModelAndView();

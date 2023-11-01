@@ -1,0 +1,71 @@
+<SpringMvcFileUpload8>
+
+1. src/main/java > 패키지 생성 : answer.data  
+처음 만들 때는 3개의 이름으로 정해야 하는 데 나중에는 2개의 이름 파일로 만들어도 된다.
+
+
+2.src>main>WEB-INF: servlet-context 들어감
+
+ > 내용 : 
+<context:component-scan base-package="spring.mvc.*, board.data.controller, answer.data" /> 변경
+
+3. src/main/java >answer.data패키지 > 
+	 아래 5가지 생성하기
+	- AnswerDto 
+	- AnswerDaoInter.java
+	- AnswerDao.java (인터페이스 연결)
+	- AnswerController.java
+	- AnswerRestController.java
+
+4. scr/main/resources > mapper 패키지
+	- answerMapper.xml 생성 (infoMapper를 복붙 후 삭제)
+
+<mapper namespace="answer">
+ 
+ 	<!-- insert 댓글작성-->
+ 	<insert id="InsertOfReanswer" parameterType="adto">
+ 		insert into reanswer (num,nickname,pass,content,writeday) values (#{num},#{nickname},#{pass},#{content},now())
+ 	</insert>
+ 	
+ 	<!-- select 댓글조회 -->
+ 	<select id="SelectNumOfReanswer" parameterType="int" resultType="adto">
+ 		select * from reanswer where num=#{num} order by idx asc
+ 	</select>
+ </mapper>
+
+5. src>main>WEB-INF>reboard> content.jsp 댓글 내용 춧가 
+
+<!-- 댓글 -->  <!-- day1018 -->
+		<tr>
+			<td colspan="4">
+				<div>댓글목록 출력예정</div>
+				<form action="ainsert" method="post" style="width: 600px;">
+					<!-- 반드시 hidden으로 num 넣어줘야 한다.  -->
+					<input type="hidden" name="num" value="${dto.num }">
+					
+					<div class="d-inline-flex">
+					
+					<b>닉네임:&nbsp; </b>
+					<input type="text" name="nickname" class="form-control"
+					style="width: 120px;" required="required">
+					
+					&nbsp;&nbsp;
+					<b> 비밀번호:&nbsp; </b>
+					<input type="password" name="pass" class="form-control"
+					style="width: 120px;" required="required">
+					</div>
+					
+					<br><br>
+					<input type="text" name="content" class="form-controller"
+					style="width: 500px;" placeholder="댓글내용을 입력해주세요">
+					<button type="submit" class="btn btn-outline-info">확인</button>
+				</form>
+			</td>
+		</tr>
+
+6. dto 
+7.
+
+
+controller에서는 자바 밖에 못 써서 prompt창 못 띄움
+왜? prompt창은 자바스크립트라서 content에서 띄울 수 있음!
