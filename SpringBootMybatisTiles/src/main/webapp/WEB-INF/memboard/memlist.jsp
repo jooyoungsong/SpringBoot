@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Gaegu:wght@300&family=Nanum+Pen+Script&family=Sunflower:wght@300&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -36,7 +37,11 @@
 		<tr>
 			<td align="center">${no }</td>
 			<c:set var="no" value="${no-1 }"/>
-			<td><a href="content?num=${dto.num }&currenPage=${currentPage}">${dto.subject}</a></td> <!-- a태그에서는 파일명이 아닌 controller 매핑주소 사용 -->
+			<td><a href="content?num=${dto.num }&currenPage=${currentPage}">${dto.subject}
+				<c:if test="${dto.uploadfile!='no'}">
+					<i class="bi bi-paperclip"></i></a><!-- a태그에서는 파일명이 아닌 controller 매핑주소 사용 -->
+				</c:if>
+			</td> 
 			<td>${dto.name}</td>
 			<td>${dto.readcount}</td>
 			<td>${dto.writeday}</td>

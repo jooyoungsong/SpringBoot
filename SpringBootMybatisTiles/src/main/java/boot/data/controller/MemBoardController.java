@@ -144,7 +144,8 @@ public class MemBoardController {
 	}
 	
 	@GetMapping("/content")
-	public ModelAndView content(String num)
+	public ModelAndView content(String num,
+			@RequestParam(defaultValue = "1") int currentPage)
 	{
 		ModelAndView model=new ModelAndView();
 		
@@ -166,10 +167,27 @@ public class MemBoardController {
 		else {
 			model.addObject("bupload", false); //확장자가 위와 같지 않으면 bupload라는 이름으로 false값을 보내도록 지정한다
 		}
-			
-		model.setViewName("/memboard/content");
+		
+		model.addObject("currentPage", currentPage); //day1102추가
+		model.setViewName("/memboard/content"); //day1101
 		
 		return model;
 	}
+
+	//day1102
 	
+	@GetMapping("/updateform")
+	public ModelAndView uform()
+	{
+		ModelAndView model=new ModelAndView();
+		
+		model.setViewName("/memboard/updateform");
+		return model;
+	}
+	
+	@GetMapping("/delete")
+	public String delete()
+	{
+		return "redirect:list";
+	}
 }

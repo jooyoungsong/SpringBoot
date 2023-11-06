@@ -67,7 +67,16 @@
 			<artifactId>tiles-el</artifactId>
 			<version>3.0.8</version>
 		</dependency>
-         
+		
+		
+		<!-- cos.jar //day1103 추가_util에 있는 se2폴더 복붙과 save폴더 만든 후 파일 업로드 때문에 넣기 -->
+		<!--servlets.com/cos -->
+		<dependency>
+		    <groupId>servlets.com</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>05Nov2002</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

@@ -12,6 +12,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<c:if test="${sessionScope.loginok!=null }">
+	<button type="button" class="btn btn-info"
+	onclick="location.href='form'">글쓰기</button>
+	</c:if>
+	<c:if test="${sessionScope.loginok==null }">
+	<button type="button" class="btn btn-info"
+	onclick="location.href='/login/main'">글쓰기</button>
+	</c:if>
 </body>
 </html>
