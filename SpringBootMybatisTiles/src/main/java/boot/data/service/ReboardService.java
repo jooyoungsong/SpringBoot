@@ -37,7 +37,7 @@ public class ReboardService implements ReboardServiceInter {
 		// TODO Auto-generated method stub
 		Map<String, Object> map=new HashMap<>();
 		map.put("searchcolumn", searchcolumn);
-		map.put("searword", searchword);
+		map.put("searchword", searchword);
 		map.put("startnum", startnum);
 		map.put("perpage", perpage);
 		

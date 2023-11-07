@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +37,7 @@ public class ReBoardController {
 	@GetMapping("/list")  //day1101 board/에서 reboard로 수정
 	public ModelAndView list(@RequestParam(defaultValue = "1") int currentPage,
 			@RequestParam(value = "searchcolumn",required = false) String sc,
-			@RequestParam(value = "searword",required = false) String sw)
+			@RequestParam(value = "searchword",required = false) String sw)
 	{
 		ModelAndView model=new ModelAndView();
 		
@@ -179,12 +181,33 @@ public class ReBoardController {
 	}
 	
 	@GetMapping("/content")
-	public String content(@RequestParam int num,Model model)
+	public String content(@RequestParam int num,String currentPage,Model model)
 	{
+		//조회수 증가
+		service.updateReadCount(num);
+		
+		//dto
 		ReboardDto dto=service.getData(num);
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("currentPage", currentPage);
 		
 		return "/reboard/content";
 	}
+	
+	//추천수 증가_ajax로!
+	@GetMapping("/likes")
+	@ResponseBody
+	public Map<String, Integer> likes(int num)
+	{
+		service.updateLikes(num);
+		int likes=service.getData(num).getLikes();
+		
+		Map<String, Integer> map=new HashMap<>();
+		map.put("likes", likes);
+		
+		return map;
+	}
+	
+	//삭제
 }

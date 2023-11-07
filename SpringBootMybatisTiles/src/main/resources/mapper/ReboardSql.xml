@@ -19,7 +19,7 @@
   			where ${searchcolumn} like concat('%',#{searchword},'%')
   			<!-- 컬럼명 표시할 때는 # 아니고, $로 표현 -->
   		</if>
-  		order by regroup desc, restep asc limit #{startnum},#{perpage}
+  		order by regroup desc, restepq asc limit #{startnum},#{perpage}
   	</select>
   	<insert id="insertReboard" parameterType="reboard">
   		insert into reminiboard values (null,#{id},#{name},#{subject},#{content},#{photo},0,0,#{regroup},#{restep},#{relevel},now())
